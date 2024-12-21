@@ -13,6 +13,9 @@ TagManager:
   - InteractionObject
   - Item
   - Bullet
+  - Zombie
+  - Waypoints
+  - ZombieHand
   layers:
   - Default
   - TransparentFX

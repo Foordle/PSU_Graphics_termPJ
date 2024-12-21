@@ -23,7 +23,7 @@ public class SC_WeaponRifle : MonoBehaviour
     public AudioClip GunShot; // 총알 발사 소리
     public float BulletSpeed; // 총알 속도
     private Transform bulletSpawnPoint; // 총알 발사 위치
-
+    private int BulletDamage = 20;
     private void PlaySound(AudioClip NewCips)
     {
         audioSC.Stop();
@@ -105,6 +105,18 @@ public class SC_WeaponRifle : MonoBehaviour
                 Quaternion adjustedRotation = bulletSpawnPoint.rotation * Quaternion.Euler(90, 0, 0);
 
                 Rigidbody rb = Instantiate(Bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+
+                SphereCollider collider = rb.gameObject.AddComponent<SphereCollider>();
+                collider.radius = 0.1f; // 총알 크기에 맞는 Radius 설정
+
+                // 충돌 감지를 위해 Rigidbody 설정
+                rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+
+                SC_Bullet bulletScript = rb.gameObject.AddComponent<SC_Bullet>();
+
+                // bulletDamage 값 설정
+                bulletScript.bulletDamage = BulletDamage; // 원하는 데미지 값
+
                 // 올바른 방향으로 발사
                 Vector3 shootDirection = bulletSpawnPoint.forward; // bulletSpawnPoint의 forward 방향
                 rb.velocity = shootDirection * BulletSpeed;
