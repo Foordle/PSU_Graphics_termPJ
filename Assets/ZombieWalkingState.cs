@@ -43,7 +43,7 @@ public class ZombieWalkingState : StateMachineBehaviour
         timer += Time.deltaTime;
         if (timer > walkingTIme)
         {
-            animator.SetBool("isPatroling", false);
+            animator.SetBool("isWalking", false);
         }
         float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
         if (distanceFromPlayer < detectionArea)
